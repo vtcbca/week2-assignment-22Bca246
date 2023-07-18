@@ -1,0 +1,103 @@
+
+
+[1]OR[2].CREATE TABLE ,INSERT RECORDS
+  -------------------------------------                                    
+   
+    (1) STUD TABLE
+
+   sqlite>  create table stud1
+   ...>         (
+   ...>           id int primary key,
+   ...>           name text
+   ...>         );
+	
+	sqlite> select * from stud1;
+1|kanha
+2|mohan
+3|radha
+4|madhav
+5|om
+6|sai
+7|ram
+8|bahika
+9|rajvi
+10|avi
+     
+    
+   
+
+  (2)STUD_DETAILS TABLE
+
+
+    sqlite> create table stud1_details
+   ...>        (
+   ...>     id int REFERENCES stud(id),
+   ...>     city text,m_no int
+   ...>     );
+  
+
+   sqlite>  insert into stud1_details values(01,'navsari',1234567890);
+sqlite>       insert into stud1_details values(02,'surat',9988776655);
+sqlite>        insert into stud1_details values(03,'bardoli',5252552523);
+sqlite>        insert into stud1_details values(04,'baleshwar',3243546576);
+sqlite>        insert into stud1_details values(05,'surat',6576766543);
+sqlite>        insert into stud1_details values(06,'ahemdabad',998877655);
+sqlite>        insert into stud1_details values(007,'bilimora',9090989796);
+sqlite>        insert into stud1_details values(08,'surat',7896543211);
+sqlite>        insert into stud1_details values(09,'bihar',9091933345);
+sqlite>       insert into stud1_details values(010,'navsari',9087654321);
+
+sqlite>  select * from stud1_details;
+1|navsari|1234567890
+2|surat|9988776655
+3|bardoli|5252552523
+4|baleshwar|3243546576
+5|surat|6576766543
+6|ahemdabad|998877655
+7|bilimora|9090989796
+8|surat|7896543211
+9|bihar|9091933345
+10|navsari|9087654321
+
+[3].DISPLAY WHOSE STUDENT COME FROM THE SURAT CITY.
+---------------------------------------------------
+   
+     select s.id,s.name,sd.city,sd.m_no from stud1 s, stud1_details sd
+   ...>         where s.id=sd.id and sd.city='surat';
+2|mohan|surat|9988776655
+5|om|surat|6576766543
+8|bahika|surat|7896543211
+
+       
+
+[4].DISPLAY STUDENT DETAILS WHOSE CITY NAME STARTS WITH 'B'.
+-----------------------------------------------------------
+
+    sqlite> select s.id,s.name,sd.city,sd.m_no from stud1 s, stud1_details sd
+   ...>         where s.id=sd.id and sd.city like 'b%';
+3|radha|bardoli|5252552523
+4|madhav|baleshwar|3243546576
+7|ram|bilimora|9090989796
+9|rajvi|bihar|9091933345
+
+      
+
+[5].UPDATE MOBILENO WHO ARE COMMING FROM 'SURAT'.
+-------------------------------------------------  
+ 
+     sqlite> update stud1_details set m_no=5356567657
+   ...>         where city='surat';
+
+sqlite>  select * from stud1_details;
+1|navsari|1234567890
+2|surat|5356567657
+3|bardoli|5252552523
+4|baleshwar|3243546576
+5|surat|5356567657
+6|ahemdabad|998877655
+7|bilimora|9090989796
+8|surat|5356567657
+9|bihar|9091933345
+10|navsari|9087654321
+
+ 
